@@ -5,11 +5,14 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function PrimaryForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<{
@@ -18,14 +21,16 @@ export default function PrimaryForm() {
     password?: string;
   }>({});
 
+  const { toast } = useToast();
+
   function validate() {
     const e: typeof errors = {};
-    if (!name.trim()) e.name = "Name is required";
-    if (!email.trim()) e.email = "Email is required";
-    else if (!/^\S+@\S+\.\S+$/.test(email))
+    if (!form.name.trim()) e.name = "Name is required";
+    if (!form.email.trim()) e.email = "Email is required";
+    else if (!/^\S+@\S+\.\S+$/.test(form.email))
       e.email = "Please enter a valid email";
-    if (!password) e.password = "Password is required";
-    else if (password.length < 6)
+    if (!form.password) e.password = "Password is required";
+    else if (form.password.length < 6)
       e.password = "Password must be at least 6 characters";
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -38,23 +43,51 @@ export default function PrimaryForm() {
 
     // Simulate an API call. Replace this with your real sign-up logic.
     try {
-      await new Promise((res) => setTimeout(res, 800));
-      // reset form on success
-      setName("");
-      setEmail("");
-      setPassword("");
-      setErrors({});
-      // TODO: show a toast or redirect
-      console.log("Signed up:", { name, email });
+      const res = await fetch("/api/add-data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...form, status: "Free" }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: data.error || "Something went wrong",
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: "User created successfully",
+        });
+        setForm({ name: "", email: "", password: "" });
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to create user",
+      });
     } finally {
       setSubmitting(false);
     }
   }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <Card className="max-w-md mx-auto mt-8 shadow-lg">
       <CardHeader>
-        <CardTitle className="text-2xl">Create an account</CardTitle>
+        <CardTitle className="text-2xl">Add Data For Account</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -64,8 +97,9 @@ export default function PrimaryForm() {
             </Label>
             <Input
               id="name"
-              value={name}
-              onChange={(ev) => setName(ev.target.value)}
+              name="name"
+              value={form.name}
+              onChange={handleChange}
               placeholder="Your full name"
               aria-invalid={!!errors.name}
             />
@@ -81,8 +115,9 @@ export default function PrimaryForm() {
             <Input
               id="email"
               type="email"
-              value={email}
-              onChange={(ev) => setEmail(ev.target.value)}
+              name="email"
+              value={form.email}
+              onChange={handleChange}
               placeholder="you@example.com"
               aria-invalid={!!errors.email}
             />
@@ -98,9 +133,10 @@ export default function PrimaryForm() {
             <div className="relative">
               <Input
                 id="password"
+                name="password"
                 type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(ev) => setPassword(ev.target.value)}
+                value={form.password}
+                onChange={handleChange}
                 placeholder="Create a password"
                 aria-invalid={!!errors.password}
                 className="pr-10"
@@ -119,14 +155,13 @@ export default function PrimaryForm() {
             )}
           </div>
 
-          <div className="flex items-center justify-between">
-            <Button type="submit" disabled={submitting}>
-              {submitting ? "Creating..." : "Create account"}
-            </Button>
-            <a href="#" className="text-sm underline">
-              Already have an account?
-            </a>
-          </div>
+          <Button
+            type="submit"
+            disabled={submitting}
+            className="w-full cursor-pointer"
+          >
+            {submitting ? "Uploading..." : "Submit"}
+          </Button>
         </form>
       </CardContent>
     </Card>
