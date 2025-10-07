@@ -1,8 +1,3 @@
-import PrimaryForm from "@/components/forms/PrimaryForm";
 export default function Home() {
-  return (
-    <div>
-      <PrimaryForm />
-    </div>
-  );
+  return <div>You will be Land somewhere</div>;
 }
