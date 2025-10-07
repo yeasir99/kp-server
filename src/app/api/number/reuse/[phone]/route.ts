@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { reUseNumber } from "@/lib/reuseNumber";
 
-interface Params {
-  params: { phone: string };
-}
+type tParams = Promise<{ phone: string }>;
 
-export async function GET(_: NextRequest, { params }: Params) {
+export async function GET(_: NextRequest, { params }: { params: tParams }) {
   try {
     const { phone } = await params;
     if (!phone) {
