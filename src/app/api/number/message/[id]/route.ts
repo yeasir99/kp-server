@@ -3,7 +3,7 @@ import { checkSMS } from "@/lib/checkMessage";
 
 type tParams = Promise<{ id: string }>;
 
-export async function GET(_: NextRequest, params: tParams) {
+export async function GET(_: NextRequest, { params }: { params: tParams }) {
   try {
     const { id } = await params;
     const data = checkSMS(id);
