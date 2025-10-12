@@ -5,7 +5,7 @@ import { authOptions } from "@/components/ui/auth";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  ctx: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -17,7 +17,7 @@ export async function PATCH(
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    const id = params.id;
+    const { id } = await ctx.params;
     // Ensure exists
     const exists = await prisma.countryPhone.findUnique({ where: { id } });
     if (!exists) return NextResponse.json({ error: "Not found" }, { status: 404 });
