@@ -9,8 +9,11 @@ export async function checkSMS(id: string) {
       },
     });
 
-    console.log(response);
-    return response.data;
+    if (response.status === 200) {
+      return response.data.sms.length
+        ? { status: true, code: response.data.sms[0] }
+        : { status: false, code: null };
+    }
   } catch (err: unknown) {
     console.log(err);
     // Narrow the error type

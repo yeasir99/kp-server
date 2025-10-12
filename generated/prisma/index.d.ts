@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Docs = $Result.DefaultSelection<Prisma.$DocsPayload>
+/**
+ * Model CountryPhone
+ * 
+ */
+export type CountryPhone = $Result.DefaultSelection<Prisma.$CountryPhonePayload>
 
 /**
  * Enums
@@ -192,6 +197,16 @@ export class PrismaClient<
     * ```
     */
   get docs(): Prisma.DocsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.countryPhone`: Exposes CRUD operations for the **CountryPhone** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CountryPhones
+    * const countryPhones = await prisma.countryPhone.findMany()
+    * ```
+    */
+  get countryPhone(): Prisma.CountryPhoneDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -633,7 +648,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Docs: 'Docs'
+    Docs: 'Docs',
+    CountryPhone: 'CountryPhone'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -652,7 +668,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "docs"
+      modelProps: "user" | "docs" | "countryPhone"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -804,6 +820,80 @@ export namespace Prisma {
           }
         }
       }
+      CountryPhone: {
+        payload: Prisma.$CountryPhonePayload<ExtArgs>
+        fields: Prisma.CountryPhoneFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CountryPhoneFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CountryPhoneFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload>
+          }
+          findFirst: {
+            args: Prisma.CountryPhoneFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CountryPhoneFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload>
+          }
+          findMany: {
+            args: Prisma.CountryPhoneFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload>[]
+          }
+          create: {
+            args: Prisma.CountryPhoneCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload>
+          }
+          createMany: {
+            args: Prisma.CountryPhoneCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CountryPhoneCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload>[]
+          }
+          delete: {
+            args: Prisma.CountryPhoneDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload>
+          }
+          update: {
+            args: Prisma.CountryPhoneUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload>
+          }
+          deleteMany: {
+            args: Prisma.CountryPhoneDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CountryPhoneUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CountryPhoneUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload>[]
+          }
+          upsert: {
+            args: Prisma.CountryPhoneUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CountryPhonePayload>
+          }
+          aggregate: {
+            args: Prisma.CountryPhoneAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCountryPhone>
+          }
+          groupBy: {
+            args: Prisma.CountryPhoneGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CountryPhoneGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CountryPhoneCountArgs<ExtArgs>
+            result: $Utils.Optional<CountryPhoneCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -902,6 +992,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     docs?: DocsOmit
+    countryPhone?: CountryPhoneOmit
   }
 
   /* Types for Logging */
@@ -2123,6 +2214,13 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    country: string | null
+    state: string | null
+    city: string | null
+    postCode: string | null
+    address: string | null
+    dob: Date | null
+    phone: string | null
     status: $Enums.ProcessStatus | null
     userId: string | null
     createdAt: Date | null
@@ -2133,6 +2231,13 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    country: string | null
+    state: string | null
+    city: string | null
+    postCode: string | null
+    address: string | null
+    dob: Date | null
+    phone: string | null
     status: $Enums.ProcessStatus | null
     userId: string | null
     createdAt: Date | null
@@ -2143,6 +2248,13 @@ export namespace Prisma {
     name: number
     email: number
     password: number
+    country: number
+    state: number
+    city: number
+    postCode: number
+    address: number
+    dob: number
+    phone: number
     status: number
     userId: number
     createdAt: number
@@ -2155,6 +2267,13 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    country?: true
+    state?: true
+    city?: true
+    postCode?: true
+    address?: true
+    dob?: true
+    phone?: true
     status?: true
     userId?: true
     createdAt?: true
@@ -2165,6 +2284,13 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    country?: true
+    state?: true
+    city?: true
+    postCode?: true
+    address?: true
+    dob?: true
+    phone?: true
     status?: true
     userId?: true
     createdAt?: true
@@ -2175,6 +2301,13 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    country?: true
+    state?: true
+    city?: true
+    postCode?: true
+    address?: true
+    dob?: true
+    phone?: true
     status?: true
     userId?: true
     createdAt?: true
@@ -2258,6 +2391,13 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    country: string
+    state: string
+    city: string
+    postCode: string
+    address: string
+    dob: Date
+    phone: string
     status: $Enums.ProcessStatus
     userId: string
     createdAt: Date
@@ -2285,6 +2425,13 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    country?: boolean
+    state?: boolean
+    city?: boolean
+    postCode?: boolean
+    address?: boolean
+    dob?: boolean
+    phone?: boolean
     status?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2296,6 +2443,13 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    country?: boolean
+    state?: boolean
+    city?: boolean
+    postCode?: boolean
+    address?: boolean
+    dob?: boolean
+    phone?: boolean
     status?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2307,6 +2461,13 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    country?: boolean
+    state?: boolean
+    city?: boolean
+    postCode?: boolean
+    address?: boolean
+    dob?: boolean
+    phone?: boolean
     status?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2318,12 +2479,19 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    country?: boolean
+    state?: boolean
+    city?: boolean
+    postCode?: boolean
+    address?: boolean
+    dob?: boolean
+    phone?: boolean
     status?: boolean
     userId?: boolean
     createdAt?: boolean
   }
 
-  export type DocsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "status" | "userId" | "createdAt", ExtArgs["result"]["docs"]>
+  export type DocsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "country" | "state" | "city" | "postCode" | "address" | "dob" | "phone" | "status" | "userId" | "createdAt", ExtArgs["result"]["docs"]>
   export type DocsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     processedBy?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2344,6 +2512,13 @@ export namespace Prisma {
       name: string
       email: string
       password: string
+      country: string
+      state: string
+      city: string
+      postCode: string
+      address: string
+      dob: Date
+      phone: string
       status: $Enums.ProcessStatus
       userId: string
       createdAt: Date
@@ -2775,6 +2950,13 @@ export namespace Prisma {
     readonly name: FieldRef<"Docs", 'String'>
     readonly email: FieldRef<"Docs", 'String'>
     readonly password: FieldRef<"Docs", 'String'>
+    readonly country: FieldRef<"Docs", 'String'>
+    readonly state: FieldRef<"Docs", 'String'>
+    readonly city: FieldRef<"Docs", 'String'>
+    readonly postCode: FieldRef<"Docs", 'String'>
+    readonly address: FieldRef<"Docs", 'String'>
+    readonly dob: FieldRef<"Docs", 'DateTime'>
+    readonly phone: FieldRef<"Docs", 'String'>
     readonly status: FieldRef<"Docs", 'ProcessStatus'>
     readonly userId: FieldRef<"Docs", 'String'>
     readonly createdAt: FieldRef<"Docs", 'DateTime'>
@@ -3193,6 +3375,1014 @@ export namespace Prisma {
 
 
   /**
+   * Model CountryPhone
+   */
+
+  export type AggregateCountryPhone = {
+    _count: CountryPhoneCountAggregateOutputType | null
+    _min: CountryPhoneMinAggregateOutputType | null
+    _max: CountryPhoneMaxAggregateOutputType | null
+  }
+
+  export type CountryPhoneMinAggregateOutputType = {
+    id: string | null
+    countryName: string | null
+    countryCode: string | null
+    apiCountryName: string | null
+    current: boolean | null
+    createdAt: Date | null
+  }
+
+  export type CountryPhoneMaxAggregateOutputType = {
+    id: string | null
+    countryName: string | null
+    countryCode: string | null
+    apiCountryName: string | null
+    current: boolean | null
+    createdAt: Date | null
+  }
+
+  export type CountryPhoneCountAggregateOutputType = {
+    id: number
+    countryName: number
+    countryCode: number
+    apiCountryName: number
+    current: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CountryPhoneMinAggregateInputType = {
+    id?: true
+    countryName?: true
+    countryCode?: true
+    apiCountryName?: true
+    current?: true
+    createdAt?: true
+  }
+
+  export type CountryPhoneMaxAggregateInputType = {
+    id?: true
+    countryName?: true
+    countryCode?: true
+    apiCountryName?: true
+    current?: true
+    createdAt?: true
+  }
+
+  export type CountryPhoneCountAggregateInputType = {
+    id?: true
+    countryName?: true
+    countryCode?: true
+    apiCountryName?: true
+    current?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CountryPhoneAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CountryPhone to aggregate.
+     */
+    where?: CountryPhoneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CountryPhones to fetch.
+     */
+    orderBy?: CountryPhoneOrderByWithRelationInput | CountryPhoneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CountryPhoneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CountryPhones from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CountryPhones.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CountryPhones
+    **/
+    _count?: true | CountryPhoneCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CountryPhoneMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CountryPhoneMaxAggregateInputType
+  }
+
+  export type GetCountryPhoneAggregateType<T extends CountryPhoneAggregateArgs> = {
+        [P in keyof T & keyof AggregateCountryPhone]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCountryPhone[P]>
+      : GetScalarType<T[P], AggregateCountryPhone[P]>
+  }
+
+
+
+
+  export type CountryPhoneGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CountryPhoneWhereInput
+    orderBy?: CountryPhoneOrderByWithAggregationInput | CountryPhoneOrderByWithAggregationInput[]
+    by: CountryPhoneScalarFieldEnum[] | CountryPhoneScalarFieldEnum
+    having?: CountryPhoneScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CountryPhoneCountAggregateInputType | true
+    _min?: CountryPhoneMinAggregateInputType
+    _max?: CountryPhoneMaxAggregateInputType
+  }
+
+  export type CountryPhoneGroupByOutputType = {
+    id: string
+    countryName: string
+    countryCode: string
+    apiCountryName: string
+    current: boolean
+    createdAt: Date
+    _count: CountryPhoneCountAggregateOutputType | null
+    _min: CountryPhoneMinAggregateOutputType | null
+    _max: CountryPhoneMaxAggregateOutputType | null
+  }
+
+  type GetCountryPhoneGroupByPayload<T extends CountryPhoneGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CountryPhoneGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CountryPhoneGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CountryPhoneGroupByOutputType[P]>
+            : GetScalarType<T[P], CountryPhoneGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CountryPhoneSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    countryName?: boolean
+    countryCode?: boolean
+    apiCountryName?: boolean
+    current?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["countryPhone"]>
+
+  export type CountryPhoneSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    countryName?: boolean
+    countryCode?: boolean
+    apiCountryName?: boolean
+    current?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["countryPhone"]>
+
+  export type CountryPhoneSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    countryName?: boolean
+    countryCode?: boolean
+    apiCountryName?: boolean
+    current?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["countryPhone"]>
+
+  export type CountryPhoneSelectScalar = {
+    id?: boolean
+    countryName?: boolean
+    countryCode?: boolean
+    apiCountryName?: boolean
+    current?: boolean
+    createdAt?: boolean
+  }
+
+  export type CountryPhoneOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "countryName" | "countryCode" | "apiCountryName" | "current" | "createdAt", ExtArgs["result"]["countryPhone"]>
+
+  export type $CountryPhonePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CountryPhone"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      countryName: string
+      countryCode: string
+      apiCountryName: string
+      current: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["countryPhone"]>
+    composites: {}
+  }
+
+  type CountryPhoneGetPayload<S extends boolean | null | undefined | CountryPhoneDefaultArgs> = $Result.GetResult<Prisma.$CountryPhonePayload, S>
+
+  type CountryPhoneCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CountryPhoneFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CountryPhoneCountAggregateInputType | true
+    }
+
+  export interface CountryPhoneDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CountryPhone'], meta: { name: 'CountryPhone' } }
+    /**
+     * Find zero or one CountryPhone that matches the filter.
+     * @param {CountryPhoneFindUniqueArgs} args - Arguments to find a CountryPhone
+     * @example
+     * // Get one CountryPhone
+     * const countryPhone = await prisma.countryPhone.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CountryPhoneFindUniqueArgs>(args: SelectSubset<T, CountryPhoneFindUniqueArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CountryPhone that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CountryPhoneFindUniqueOrThrowArgs} args - Arguments to find a CountryPhone
+     * @example
+     * // Get one CountryPhone
+     * const countryPhone = await prisma.countryPhone.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CountryPhoneFindUniqueOrThrowArgs>(args: SelectSubset<T, CountryPhoneFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CountryPhone that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CountryPhoneFindFirstArgs} args - Arguments to find a CountryPhone
+     * @example
+     * // Get one CountryPhone
+     * const countryPhone = await prisma.countryPhone.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CountryPhoneFindFirstArgs>(args?: SelectSubset<T, CountryPhoneFindFirstArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CountryPhone that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CountryPhoneFindFirstOrThrowArgs} args - Arguments to find a CountryPhone
+     * @example
+     * // Get one CountryPhone
+     * const countryPhone = await prisma.countryPhone.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CountryPhoneFindFirstOrThrowArgs>(args?: SelectSubset<T, CountryPhoneFindFirstOrThrowArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CountryPhones that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CountryPhoneFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CountryPhones
+     * const countryPhones = await prisma.countryPhone.findMany()
+     * 
+     * // Get first 10 CountryPhones
+     * const countryPhones = await prisma.countryPhone.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const countryPhoneWithIdOnly = await prisma.countryPhone.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CountryPhoneFindManyArgs>(args?: SelectSubset<T, CountryPhoneFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CountryPhone.
+     * @param {CountryPhoneCreateArgs} args - Arguments to create a CountryPhone.
+     * @example
+     * // Create one CountryPhone
+     * const CountryPhone = await prisma.countryPhone.create({
+     *   data: {
+     *     // ... data to create a CountryPhone
+     *   }
+     * })
+     * 
+     */
+    create<T extends CountryPhoneCreateArgs>(args: SelectSubset<T, CountryPhoneCreateArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CountryPhones.
+     * @param {CountryPhoneCreateManyArgs} args - Arguments to create many CountryPhones.
+     * @example
+     * // Create many CountryPhones
+     * const countryPhone = await prisma.countryPhone.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CountryPhoneCreateManyArgs>(args?: SelectSubset<T, CountryPhoneCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CountryPhones and returns the data saved in the database.
+     * @param {CountryPhoneCreateManyAndReturnArgs} args - Arguments to create many CountryPhones.
+     * @example
+     * // Create many CountryPhones
+     * const countryPhone = await prisma.countryPhone.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CountryPhones and only return the `id`
+     * const countryPhoneWithIdOnly = await prisma.countryPhone.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CountryPhoneCreateManyAndReturnArgs>(args?: SelectSubset<T, CountryPhoneCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CountryPhone.
+     * @param {CountryPhoneDeleteArgs} args - Arguments to delete one CountryPhone.
+     * @example
+     * // Delete one CountryPhone
+     * const CountryPhone = await prisma.countryPhone.delete({
+     *   where: {
+     *     // ... filter to delete one CountryPhone
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CountryPhoneDeleteArgs>(args: SelectSubset<T, CountryPhoneDeleteArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CountryPhone.
+     * @param {CountryPhoneUpdateArgs} args - Arguments to update one CountryPhone.
+     * @example
+     * // Update one CountryPhone
+     * const countryPhone = await prisma.countryPhone.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CountryPhoneUpdateArgs>(args: SelectSubset<T, CountryPhoneUpdateArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CountryPhones.
+     * @param {CountryPhoneDeleteManyArgs} args - Arguments to filter CountryPhones to delete.
+     * @example
+     * // Delete a few CountryPhones
+     * const { count } = await prisma.countryPhone.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CountryPhoneDeleteManyArgs>(args?: SelectSubset<T, CountryPhoneDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CountryPhones.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CountryPhoneUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CountryPhones
+     * const countryPhone = await prisma.countryPhone.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CountryPhoneUpdateManyArgs>(args: SelectSubset<T, CountryPhoneUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CountryPhones and returns the data updated in the database.
+     * @param {CountryPhoneUpdateManyAndReturnArgs} args - Arguments to update many CountryPhones.
+     * @example
+     * // Update many CountryPhones
+     * const countryPhone = await prisma.countryPhone.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CountryPhones and only return the `id`
+     * const countryPhoneWithIdOnly = await prisma.countryPhone.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CountryPhoneUpdateManyAndReturnArgs>(args: SelectSubset<T, CountryPhoneUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CountryPhone.
+     * @param {CountryPhoneUpsertArgs} args - Arguments to update or create a CountryPhone.
+     * @example
+     * // Update or create a CountryPhone
+     * const countryPhone = await prisma.countryPhone.upsert({
+     *   create: {
+     *     // ... data to create a CountryPhone
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CountryPhone we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CountryPhoneUpsertArgs>(args: SelectSubset<T, CountryPhoneUpsertArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CountryPhones.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CountryPhoneCountArgs} args - Arguments to filter CountryPhones to count.
+     * @example
+     * // Count the number of CountryPhones
+     * const count = await prisma.countryPhone.count({
+     *   where: {
+     *     // ... the filter for the CountryPhones we want to count
+     *   }
+     * })
+    **/
+    count<T extends CountryPhoneCountArgs>(
+      args?: Subset<T, CountryPhoneCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CountryPhoneCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CountryPhone.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CountryPhoneAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CountryPhoneAggregateArgs>(args: Subset<T, CountryPhoneAggregateArgs>): Prisma.PrismaPromise<GetCountryPhoneAggregateType<T>>
+
+    /**
+     * Group by CountryPhone.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CountryPhoneGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CountryPhoneGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CountryPhoneGroupByArgs['orderBy'] }
+        : { orderBy?: CountryPhoneGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CountryPhoneGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCountryPhoneGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CountryPhone model
+   */
+  readonly fields: CountryPhoneFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CountryPhone.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CountryPhoneClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CountryPhone model
+   */
+  interface CountryPhoneFieldRefs {
+    readonly id: FieldRef<"CountryPhone", 'String'>
+    readonly countryName: FieldRef<"CountryPhone", 'String'>
+    readonly countryCode: FieldRef<"CountryPhone", 'String'>
+    readonly apiCountryName: FieldRef<"CountryPhone", 'String'>
+    readonly current: FieldRef<"CountryPhone", 'Boolean'>
+    readonly createdAt: FieldRef<"CountryPhone", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CountryPhone findUnique
+   */
+  export type CountryPhoneFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * Filter, which CountryPhone to fetch.
+     */
+    where: CountryPhoneWhereUniqueInput
+  }
+
+  /**
+   * CountryPhone findUniqueOrThrow
+   */
+  export type CountryPhoneFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * Filter, which CountryPhone to fetch.
+     */
+    where: CountryPhoneWhereUniqueInput
+  }
+
+  /**
+   * CountryPhone findFirst
+   */
+  export type CountryPhoneFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * Filter, which CountryPhone to fetch.
+     */
+    where?: CountryPhoneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CountryPhones to fetch.
+     */
+    orderBy?: CountryPhoneOrderByWithRelationInput | CountryPhoneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CountryPhones.
+     */
+    cursor?: CountryPhoneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CountryPhones from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CountryPhones.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CountryPhones.
+     */
+    distinct?: CountryPhoneScalarFieldEnum | CountryPhoneScalarFieldEnum[]
+  }
+
+  /**
+   * CountryPhone findFirstOrThrow
+   */
+  export type CountryPhoneFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * Filter, which CountryPhone to fetch.
+     */
+    where?: CountryPhoneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CountryPhones to fetch.
+     */
+    orderBy?: CountryPhoneOrderByWithRelationInput | CountryPhoneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CountryPhones.
+     */
+    cursor?: CountryPhoneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CountryPhones from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CountryPhones.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CountryPhones.
+     */
+    distinct?: CountryPhoneScalarFieldEnum | CountryPhoneScalarFieldEnum[]
+  }
+
+  /**
+   * CountryPhone findMany
+   */
+  export type CountryPhoneFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * Filter, which CountryPhones to fetch.
+     */
+    where?: CountryPhoneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CountryPhones to fetch.
+     */
+    orderBy?: CountryPhoneOrderByWithRelationInput | CountryPhoneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CountryPhones.
+     */
+    cursor?: CountryPhoneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CountryPhones from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CountryPhones.
+     */
+    skip?: number
+    distinct?: CountryPhoneScalarFieldEnum | CountryPhoneScalarFieldEnum[]
+  }
+
+  /**
+   * CountryPhone create
+   */
+  export type CountryPhoneCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * The data needed to create a CountryPhone.
+     */
+    data: XOR<CountryPhoneCreateInput, CountryPhoneUncheckedCreateInput>
+  }
+
+  /**
+   * CountryPhone createMany
+   */
+  export type CountryPhoneCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CountryPhones.
+     */
+    data: CountryPhoneCreateManyInput | CountryPhoneCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CountryPhone createManyAndReturn
+   */
+  export type CountryPhoneCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * The data used to create many CountryPhones.
+     */
+    data: CountryPhoneCreateManyInput | CountryPhoneCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CountryPhone update
+   */
+  export type CountryPhoneUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * The data needed to update a CountryPhone.
+     */
+    data: XOR<CountryPhoneUpdateInput, CountryPhoneUncheckedUpdateInput>
+    /**
+     * Choose, which CountryPhone to update.
+     */
+    where: CountryPhoneWhereUniqueInput
+  }
+
+  /**
+   * CountryPhone updateMany
+   */
+  export type CountryPhoneUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CountryPhones.
+     */
+    data: XOR<CountryPhoneUpdateManyMutationInput, CountryPhoneUncheckedUpdateManyInput>
+    /**
+     * Filter which CountryPhones to update
+     */
+    where?: CountryPhoneWhereInput
+    /**
+     * Limit how many CountryPhones to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CountryPhone updateManyAndReturn
+   */
+  export type CountryPhoneUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * The data used to update CountryPhones.
+     */
+    data: XOR<CountryPhoneUpdateManyMutationInput, CountryPhoneUncheckedUpdateManyInput>
+    /**
+     * Filter which CountryPhones to update
+     */
+    where?: CountryPhoneWhereInput
+    /**
+     * Limit how many CountryPhones to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CountryPhone upsert
+   */
+  export type CountryPhoneUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * The filter to search for the CountryPhone to update in case it exists.
+     */
+    where: CountryPhoneWhereUniqueInput
+    /**
+     * In case the CountryPhone found by the `where` argument doesn't exist, create a new CountryPhone with this data.
+     */
+    create: XOR<CountryPhoneCreateInput, CountryPhoneUncheckedCreateInput>
+    /**
+     * In case the CountryPhone was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CountryPhoneUpdateInput, CountryPhoneUncheckedUpdateInput>
+  }
+
+  /**
+   * CountryPhone delete
+   */
+  export type CountryPhoneDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * Filter which CountryPhone to delete.
+     */
+    where: CountryPhoneWhereUniqueInput
+  }
+
+  /**
+   * CountryPhone deleteMany
+   */
+  export type CountryPhoneDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CountryPhones to delete
+     */
+    where?: CountryPhoneWhereInput
+    /**
+     * Limit how many CountryPhones to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CountryPhone without action
+   */
+  export type CountryPhoneDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3224,12 +4414,31 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     password: 'password',
+    country: 'country',
+    state: 'state',
+    city: 'city',
+    postCode: 'postCode',
+    address: 'address',
+    dob: 'dob',
+    phone: 'phone',
     status: 'status',
     userId: 'userId',
     createdAt: 'createdAt'
   };
 
   export type DocsScalarFieldEnum = (typeof DocsScalarFieldEnum)[keyof typeof DocsScalarFieldEnum]
+
+
+  export const CountryPhoneScalarFieldEnum: {
+    id: 'id',
+    countryName: 'countryName',
+    countryCode: 'countryCode',
+    apiCountryName: 'apiCountryName',
+    current: 'current',
+    createdAt: 'createdAt'
+  };
+
+  export type CountryPhoneScalarFieldEnum = (typeof CountryPhoneScalarFieldEnum)[keyof typeof CountryPhoneScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3314,6 +4523,13 @@ export namespace Prisma {
    * Reference to a field of type 'ProcessStatus[]'
    */
   export type ListEnumProcessStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProcessStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -3407,6 +4623,13 @@ export namespace Prisma {
     name?: StringFilter<"Docs"> | string
     email?: StringFilter<"Docs"> | string
     password?: StringFilter<"Docs"> | string
+    country?: StringFilter<"Docs"> | string
+    state?: StringFilter<"Docs"> | string
+    city?: StringFilter<"Docs"> | string
+    postCode?: StringFilter<"Docs"> | string
+    address?: StringFilter<"Docs"> | string
+    dob?: DateTimeFilter<"Docs"> | Date | string
+    phone?: StringFilter<"Docs"> | string
     status?: EnumProcessStatusFilter<"Docs"> | $Enums.ProcessStatus
     userId?: StringFilter<"Docs"> | string
     createdAt?: DateTimeFilter<"Docs"> | Date | string
@@ -3418,6 +4641,13 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    city?: SortOrder
+    postCode?: SortOrder
+    address?: SortOrder
+    dob?: SortOrder
+    phone?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3432,6 +4662,13 @@ export namespace Prisma {
     NOT?: DocsWhereInput | DocsWhereInput[]
     name?: StringFilter<"Docs"> | string
     password?: StringFilter<"Docs"> | string
+    country?: StringFilter<"Docs"> | string
+    state?: StringFilter<"Docs"> | string
+    city?: StringFilter<"Docs"> | string
+    postCode?: StringFilter<"Docs"> | string
+    address?: StringFilter<"Docs"> | string
+    dob?: DateTimeFilter<"Docs"> | Date | string
+    phone?: StringFilter<"Docs"> | string
     status?: EnumProcessStatusFilter<"Docs"> | $Enums.ProcessStatus
     userId?: StringFilter<"Docs"> | string
     createdAt?: DateTimeFilter<"Docs"> | Date | string
@@ -3443,6 +4680,13 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    city?: SortOrder
+    postCode?: SortOrder
+    address?: SortOrder
+    dob?: SortOrder
+    phone?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3459,9 +4703,73 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Docs"> | string
     email?: StringWithAggregatesFilter<"Docs"> | string
     password?: StringWithAggregatesFilter<"Docs"> | string
+    country?: StringWithAggregatesFilter<"Docs"> | string
+    state?: StringWithAggregatesFilter<"Docs"> | string
+    city?: StringWithAggregatesFilter<"Docs"> | string
+    postCode?: StringWithAggregatesFilter<"Docs"> | string
+    address?: StringWithAggregatesFilter<"Docs"> | string
+    dob?: DateTimeWithAggregatesFilter<"Docs"> | Date | string
+    phone?: StringWithAggregatesFilter<"Docs"> | string
     status?: EnumProcessStatusWithAggregatesFilter<"Docs"> | $Enums.ProcessStatus
     userId?: StringWithAggregatesFilter<"Docs"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Docs"> | Date | string
+  }
+
+  export type CountryPhoneWhereInput = {
+    AND?: CountryPhoneWhereInput | CountryPhoneWhereInput[]
+    OR?: CountryPhoneWhereInput[]
+    NOT?: CountryPhoneWhereInput | CountryPhoneWhereInput[]
+    id?: StringFilter<"CountryPhone"> | string
+    countryName?: StringFilter<"CountryPhone"> | string
+    countryCode?: StringFilter<"CountryPhone"> | string
+    apiCountryName?: StringFilter<"CountryPhone"> | string
+    current?: BoolFilter<"CountryPhone"> | boolean
+    createdAt?: DateTimeFilter<"CountryPhone"> | Date | string
+  }
+
+  export type CountryPhoneOrderByWithRelationInput = {
+    id?: SortOrder
+    countryName?: SortOrder
+    countryCode?: SortOrder
+    apiCountryName?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CountryPhoneWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CountryPhoneWhereInput | CountryPhoneWhereInput[]
+    OR?: CountryPhoneWhereInput[]
+    NOT?: CountryPhoneWhereInput | CountryPhoneWhereInput[]
+    countryName?: StringFilter<"CountryPhone"> | string
+    countryCode?: StringFilter<"CountryPhone"> | string
+    apiCountryName?: StringFilter<"CountryPhone"> | string
+    current?: BoolFilter<"CountryPhone"> | boolean
+    createdAt?: DateTimeFilter<"CountryPhone"> | Date | string
+  }, "id">
+
+  export type CountryPhoneOrderByWithAggregationInput = {
+    id?: SortOrder
+    countryName?: SortOrder
+    countryCode?: SortOrder
+    apiCountryName?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+    _count?: CountryPhoneCountOrderByAggregateInput
+    _max?: CountryPhoneMaxOrderByAggregateInput
+    _min?: CountryPhoneMinOrderByAggregateInput
+  }
+
+  export type CountryPhoneScalarWhereWithAggregatesInput = {
+    AND?: CountryPhoneScalarWhereWithAggregatesInput | CountryPhoneScalarWhereWithAggregatesInput[]
+    OR?: CountryPhoneScalarWhereWithAggregatesInput[]
+    NOT?: CountryPhoneScalarWhereWithAggregatesInput | CountryPhoneScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CountryPhone"> | string
+    countryName?: StringWithAggregatesFilter<"CountryPhone"> | string
+    countryCode?: StringWithAggregatesFilter<"CountryPhone"> | string
+    apiCountryName?: StringWithAggregatesFilter<"CountryPhone"> | string
+    current?: BoolWithAggregatesFilter<"CountryPhone"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"CountryPhone"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -3543,6 +4851,13 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    country: string
+    state: string
+    city: string
+    postCode: string
+    address: string
+    dob: Date | string
+    phone: string
     status?: $Enums.ProcessStatus
     createdAt?: Date | string
     processedBy: UserCreateNestedOneWithoutDocumentInput
@@ -3553,6 +4868,13 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    country: string
+    state: string
+    city: string
+    postCode: string
+    address: string
+    dob: Date | string
+    phone: string
     status?: $Enums.ProcessStatus
     userId: string
     createdAt?: Date | string
@@ -3563,6 +4885,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    postCode?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    dob?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: StringFieldUpdateOperationsInput | string
     status?: EnumProcessStatusFieldUpdateOperationsInput | $Enums.ProcessStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     processedBy?: UserUpdateOneRequiredWithoutDocumentNestedInput
@@ -3573,6 +4902,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    postCode?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    dob?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: StringFieldUpdateOperationsInput | string
     status?: EnumProcessStatusFieldUpdateOperationsInput | $Enums.ProcessStatus
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3583,6 +4919,13 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    country: string
+    state: string
+    city: string
+    postCode: string
+    address: string
+    dob: Date | string
+    phone: string
     status?: $Enums.ProcessStatus
     userId: string
     createdAt?: Date | string
@@ -3593,6 +4936,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    postCode?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    dob?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: StringFieldUpdateOperationsInput | string
     status?: EnumProcessStatusFieldUpdateOperationsInput | $Enums.ProcessStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3602,8 +4952,78 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    postCode?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    dob?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: StringFieldUpdateOperationsInput | string
     status?: EnumProcessStatusFieldUpdateOperationsInput | $Enums.ProcessStatus
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CountryPhoneCreateInput = {
+    id?: string
+    countryName: string
+    countryCode: string
+    apiCountryName: string
+    current?: boolean
+    createdAt?: Date | string
+  }
+
+  export type CountryPhoneUncheckedCreateInput = {
+    id?: string
+    countryName: string
+    countryCode: string
+    apiCountryName: string
+    current?: boolean
+    createdAt?: Date | string
+  }
+
+  export type CountryPhoneUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    countryName?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    apiCountryName?: StringFieldUpdateOperationsInput | string
+    current?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CountryPhoneUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    countryName?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    apiCountryName?: StringFieldUpdateOperationsInput | string
+    current?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CountryPhoneCreateManyInput = {
+    id?: string
+    countryName: string
+    countryCode: string
+    apiCountryName: string
+    current?: boolean
+    createdAt?: Date | string
+  }
+
+  export type CountryPhoneUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    countryName?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    apiCountryName?: StringFieldUpdateOperationsInput | string
+    current?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CountryPhoneUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    countryName?: StringFieldUpdateOperationsInput | string
+    countryCode?: StringFieldUpdateOperationsInput | string
+    apiCountryName?: StringFieldUpdateOperationsInput | string
+    current?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -3777,6 +5197,13 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    city?: SortOrder
+    postCode?: SortOrder
+    address?: SortOrder
+    dob?: SortOrder
+    phone?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3787,6 +5214,13 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    city?: SortOrder
+    postCode?: SortOrder
+    address?: SortOrder
+    dob?: SortOrder
+    phone?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3797,6 +5231,13 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    city?: SortOrder
+    postCode?: SortOrder
+    address?: SortOrder
+    dob?: SortOrder
+    phone?: SortOrder
     status?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -3810,6 +5251,46 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumProcessStatusFilter<$PrismaModel>
     _max?: NestedEnumProcessStatusFilter<$PrismaModel>
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type CountryPhoneCountOrderByAggregateInput = {
+    id?: SortOrder
+    countryName?: SortOrder
+    countryCode?: SortOrder
+    apiCountryName?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CountryPhoneMaxOrderByAggregateInput = {
+    id?: SortOrder
+    countryName?: SortOrder
+    countryCode?: SortOrder
+    apiCountryName?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CountryPhoneMinOrderByAggregateInput = {
+    id?: SortOrder
+    countryName?: SortOrder
+    countryCode?: SortOrder
+    apiCountryName?: SortOrder
+    current?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DocsCreateNestedManyWithoutProcessedByInput = {
@@ -3886,6 +5367,10 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutDocumentInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDocumentInput, UserUpdateWithoutDocumentInput>, UserUncheckedUpdateWithoutDocumentInput>
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -4031,11 +5516,31 @@ export namespace Prisma {
     _max?: NestedEnumProcessStatusFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type DocsCreateWithoutProcessedByInput = {
     id?: string
     name: string
     email: string
     password: string
+    country: string
+    state: string
+    city: string
+    postCode: string
+    address: string
+    dob: Date | string
+    phone: string
     status?: $Enums.ProcessStatus
     createdAt?: Date | string
   }
@@ -4045,6 +5550,13 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    country: string
+    state: string
+    city: string
+    postCode: string
+    address: string
+    dob: Date | string
+    phone: string
     status?: $Enums.ProcessStatus
     createdAt?: Date | string
   }
@@ -4083,6 +5595,13 @@ export namespace Prisma {
     name?: StringFilter<"Docs"> | string
     email?: StringFilter<"Docs"> | string
     password?: StringFilter<"Docs"> | string
+    country?: StringFilter<"Docs"> | string
+    state?: StringFilter<"Docs"> | string
+    city?: StringFilter<"Docs"> | string
+    postCode?: StringFilter<"Docs"> | string
+    address?: StringFilter<"Docs"> | string
+    dob?: DateTimeFilter<"Docs"> | Date | string
+    phone?: StringFilter<"Docs"> | string
     status?: EnumProcessStatusFilter<"Docs"> | $Enums.ProcessStatus
     userId?: StringFilter<"Docs"> | string
     createdAt?: DateTimeFilter<"Docs"> | Date | string
@@ -4149,6 +5668,13 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    country: string
+    state: string
+    city: string
+    postCode: string
+    address: string
+    dob: Date | string
+    phone: string
     status?: $Enums.ProcessStatus
     createdAt?: Date | string
   }
@@ -4158,6 +5684,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    postCode?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    dob?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: StringFieldUpdateOperationsInput | string
     status?: EnumProcessStatusFieldUpdateOperationsInput | $Enums.ProcessStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4167,6 +5700,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    postCode?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    dob?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: StringFieldUpdateOperationsInput | string
     status?: EnumProcessStatusFieldUpdateOperationsInput | $Enums.ProcessStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4176,6 +5716,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    postCode?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    dob?: DateTimeFieldUpdateOperationsInput | Date | string
+    phone?: StringFieldUpdateOperationsInput | string
     status?: EnumProcessStatusFieldUpdateOperationsInput | $Enums.ProcessStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

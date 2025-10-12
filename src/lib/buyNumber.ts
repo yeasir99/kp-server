@@ -1,11 +1,21 @@
 import axios from "axios";
-export async function buyNumber() {
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+
+export type ResType = {
+  status: boolean;
+  data: {
+    id: number;
+    phone: string;
+    operator: string;
+    country: string;
+  } | null;
+};
+
+export async function buyNumber(): Promise<ResType> {
   try {
-    const country = "usa";
+    const country = "england";
     const operator = "any";
     const product = "amazon";
-
-    console.log(process.env.NumberApi);
 
     const res = await axios.get(
       `https://5sim.net/v1/user/buy/activation/${country}/${operator}/${product}`,
@@ -17,9 +27,33 @@ export async function buyNumber() {
       }
     );
 
-    console.log(res);
-    return res.data;
+    if (res.status === 200) {
+      const parsed = parsePhoneNumberFromString(res.data.phone);
+      let country;
+      let phone;
+      if (parsed) {
+        country = parsed.country;
+        phone = parsed.nationalNumber;
+      }
+
+      return {
+        status: true,
+        data: {
+          id: res.data.id,
+          phone: phone || res.data.phone,
+          operator: res.data.operator,
+          country: country || res.data.country,
+        },
+      };
+    }
+    return {
+      status: false,
+      data: null,
+    };
   } catch (error) {
-    console.log(error);
+    return {
+      status: false,
+      data: null,
+    };
   }
 }

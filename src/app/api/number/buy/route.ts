@@ -1,11 +1,21 @@
 import { NextResponse } from "next/server";
-import { buyNumber } from "@/lib/buyNumber";
+import { buyNumber, ResType } from "@/lib/buyNumber";
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   try {
-    const data = buyNumber();
+    const responseData: ResType = await buyNumber();
+    if (!responseData.status) {
+      return NextResponse.json(
+        { error: "Failed to buy number" },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(
-      { message: "User created successfully", data },
+      {
+        message: "Number purchased successfully",
+        data: responseData.data,
+      },
       { status: 201 }
     );
   } catch (error) {

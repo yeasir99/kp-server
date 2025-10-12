@@ -102,6 +102,7 @@ export default function PrimaryForm() {
               onChange={handleChange}
               placeholder="Your full name"
               aria-invalid={!!errors.name}
+              required
             />
             {errors.name && (
               <p className="text-sm text-red-600 mt-1">{errors.name}</p>
@@ -120,6 +121,7 @@ export default function PrimaryForm() {
               onChange={handleChange}
               placeholder="you@example.com"
               aria-invalid={!!errors.email}
+              required
             />
             {errors.email && (
               <p className="text-sm text-red-600 mt-1">{errors.email}</p>
@@ -140,6 +142,7 @@ export default function PrimaryForm() {
                 placeholder="Create a password"
                 aria-invalid={!!errors.password}
                 className="pr-10"
+                required
               />
               <button
                 type="button"

@@ -107,8 +107,24 @@ exports.Prisma.DocsScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
+  country: 'country',
+  state: 'state',
+  city: 'city',
+  postCode: 'postCode',
+  address: 'address',
+  dob: 'dob',
+  phone: 'phone',
   status: 'status',
   userId: 'userId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CountryPhoneScalarFieldEnum = {
+  id: 'id',
+  countryName: 'countryName',
+  countryCode: 'countryCode',
+  apiCountryName: 'apiCountryName',
+  current: 'current',
   createdAt: 'createdAt'
 };
 
@@ -140,7 +156,8 @@ exports.ProcessStatus = exports.$Enums.ProcessStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Docs: 'Docs'
+  Docs: 'Docs',
+  CountryPhone: 'CountryPhone'
 };
 /**
  * Create the Client
@@ -181,6 +198,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -189,13 +207,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  ROOT\n  USER\n}\n\nenum ProcessStatus {\n  NOT_TOUCH\n  EMAIL_VERIFICATION\n  PHONE_VERIFICATION\n  CREATED\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  name      String?\n  email     String?  @unique\n  password  String?\n  role      UserRole @default(USER)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  document  Docs[]   @relation(\"UserDocument\")\n}\n\nmodel Docs {\n  id          String        @id @default(cuid())\n  name        String\n  email       String        @unique\n  password    String\n  status      ProcessStatus @default(NOT_TOUCH)\n  processedBy User          @relation(\"UserDocument\", fields: [userId], references: [id])\n  userId      String\n  createdAt   DateTime      @default(now())\n}\n",
-  "inlineSchemaHash": "6fe702adf5ba9bef057cf1ef27bdd01e4336d7a63314c3e0673f66294dd27b2f",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  ROOT\n  USER\n}\n\nenum ProcessStatus {\n  NOT_TOUCH\n  EMAIL_VERIFICATION\n  PHONE_VERIFICATION\n  CREATED\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  name      String?\n  email     String?  @unique\n  password  String?\n  role      UserRole @default(USER)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  document  Docs[]   @relation(\"UserDocument\")\n}\n\nmodel Docs {\n  id          String        @id @default(cuid())\n  name        String\n  email       String        @unique\n  password    String\n  // New profile fields\n  country     String\n  state       String\n  city        String\n  postCode    String\n  address     String\n  dob         DateTime\n  phone       String\n  status      ProcessStatus @default(NOT_TOUCH)\n  processedBy User          @relation(\"UserDocument\", fields: [userId], references: [id])\n  userId      String\n  createdAt   DateTime      @default(now())\n}\n\n// Country phone metadata\nmodel CountryPhone {\n  id             String   @id @default(cuid())\n  countryName    String\n  countryCode    String\n  apiCountryName String\n  current        Boolean  @default(false)\n  createdAt      DateTime @default(now())\n}\n",
+  "inlineSchemaHash": "98bbdeed6b070725893e91bbc01080969e7f302a922f353764b952b2640d6ac6",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"UserRole\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"document\",\"kind\":\"object\",\"type\":\"Docs\",\"relationName\":\"UserDocument\"}],\"dbName\":null},\"Docs\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ProcessStatus\"},{\"name\":\"processedBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserDocument\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"UserRole\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"document\",\"kind\":\"object\",\"type\":\"Docs\",\"relationName\":\"UserDocument\"}],\"dbName\":null},\"Docs\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"country\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"state\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"city\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dob\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ProcessStatus\"},{\"name\":\"processedBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserDocument\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"CountryPhone\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"countryName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"countryCode\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"apiCountryName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"current\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

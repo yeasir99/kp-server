@@ -6,9 +6,10 @@ type tParams = Promise<{ id: string }>;
 export async function GET(_: NextRequest, { params }: { params: tParams }) {
   try {
     const { id } = await params;
-    const data = checkSMS(id);
+    const data = await checkSMS(id);
+    console.log(data);
     return NextResponse.json(
-      { message: "User created successfully", data },
+      { message: "code found successfully", data },
       { status: 201 }
     );
   } catch (error) {

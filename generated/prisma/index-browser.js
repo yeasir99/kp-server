@@ -135,8 +135,24 @@ exports.Prisma.DocsScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
+  country: 'country',
+  state: 'state',
+  city: 'city',
+  postCode: 'postCode',
+  address: 'address',
+  dob: 'dob',
+  phone: 'phone',
   status: 'status',
   userId: 'userId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CountryPhoneScalarFieldEnum = {
+  id: 'id',
+  countryName: 'countryName',
+  countryCode: 'countryCode',
+  apiCountryName: 'apiCountryName',
+  current: 'current',
   createdAt: 'createdAt'
 };
 
@@ -168,7 +184,8 @@ exports.ProcessStatus = exports.$Enums.ProcessStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Docs: 'Docs'
+  Docs: 'Docs',
+  CountryPhone: 'CountryPhone'
 };
 
 /**

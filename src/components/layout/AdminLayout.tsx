@@ -15,7 +15,9 @@ import { Button } from "../ui/button";
 
 const navLinks = [
   { name: "Dashboard", href: "/admin" },
+  { name: "Docs", href: "/admin/docs" },
   { name: "User List", href: "/admin/users" },
+  { name: "Controls", href: "/admin/controls" },
 ];
 
 export default function AdminLayout({ children }: { children: ReactNode }) {

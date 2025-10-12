@@ -42,7 +42,26 @@ model Docs {
   name        String
   email       String        @unique
   password    String
+  // New profile fields
+  country     String
+  state       String
+  city        String
+  postCode    String
+  address     String
+  dob         DateTime
+  phone       String
   status      ProcessStatus @default(NOT_TOUCH)
   processedBy User          @relation("UserDocument", fields: [userId], references: [id])
   userId      String
+  createdAt   DateTime      @default(now())
+}
+
+// Country phone metadata
+model CountryPhone {
+  id             String   @id @default(cuid())
+  countryName    String
+  countryCode    String
+  apiCountryName String
+  current        Boolean  @default(false)
+  createdAt      DateTime @default(now())
 }
