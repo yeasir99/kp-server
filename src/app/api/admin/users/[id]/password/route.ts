@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+  ctx: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -29,7 +29,8 @@ export async function PATCH(
     }
 
     const hashed = await bcrypt.hash(password, 10);
-    await prisma.user.update({ where: { id: params.id }, data: { password: hashed } });
+    const { id } = await ctx.params;
+    await prisma.user.update({ where: { id }, data: { password: hashed } });
 
     return NextResponse.json({ message: "Password updated" });
   } catch (err) {
@@ -37,4 +38,3 @@ export async function PATCH(
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
-
