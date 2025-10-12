@@ -8,12 +8,19 @@ export type ResType = {
     phone: string;
     operator: string;
     country: string;
+    countryCode: string;
   } | null;
 };
 
-export async function buyNumber(): Promise<ResType> {
+type PropType = {
+  countryName: string;
+  countryCode: string;
+  apiCountryName: string;
+} | null;
+
+export async function buyNumber(prop: PropType): Promise<ResType> {
   try {
-    const country = "england";
+    const country = prop?.apiCountryName ? prop?.apiCountryName : "england";
     const operator = "any";
     const product = "amazon";
 
@@ -43,6 +50,7 @@ export async function buyNumber(): Promise<ResType> {
           phone: phone || res.data.phone,
           operator: res.data.operator,
           country: country || res.data.country,
+          countryCode: prop?.countryCode ? prop?.countryCode : "GB",
         },
       };
     }

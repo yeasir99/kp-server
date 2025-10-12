@@ -1,9 +1,15 @@
 import { NextResponse } from "next/server";
 import { buyNumber, ResType } from "@/lib/buyNumber";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(req: Request) {
   try {
-    const responseData: ResType = await buyNumber();
+    const country = await prisma.countryPhone.findFirst({
+      where: {
+        current: true,
+      },
+    });
+    const responseData: ResType = await buyNumber(country);
     if (!responseData.status) {
       return NextResponse.json(
         { error: "Failed to buy number" },

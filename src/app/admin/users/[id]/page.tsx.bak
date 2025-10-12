@@ -9,7 +9,7 @@ import { UserControls } from "@/components/admin/UserControls";
 export default async function AdminUserControlsPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {
@@ -34,9 +34,8 @@ export default async function AdminUserControlsPage({
     );
   }
 
-  const { id } = await params;
   const user = await prisma.user.findUnique({
-    where: { id },
+    where: { id: params.id },
     select: { id: true, name: true, email: true, role: true, createdAt: true },
   });
   if (!user) {
@@ -70,4 +69,5 @@ export default async function AdminUserControlsPage({
     </div>
   );
 }
+
 

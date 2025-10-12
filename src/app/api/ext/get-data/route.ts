@@ -27,8 +27,16 @@ export async function GET(req: Request) {
         name: true,
         email: true,
         password: true,
+        country: true,
+        state: true,
+        city: true,
+        postCode: true,
+        address: true,
+        dob: true,
+        phone: true,
       },
     });
+    console.log(data);
     return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     console.log(error);
