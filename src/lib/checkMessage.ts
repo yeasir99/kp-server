@@ -11,7 +11,10 @@ export async function checkSMS(id: string) {
 
     if (response.status === 200) {
       return response.data.sms.length
-        ? { status: true, code: response.data.sms[0] }
+        ? {
+            status: true,
+            code: response.data.sms[response.data.sms.length - 1],
+          }
         : { status: false, code: null };
     }
   } catch (err: unknown) {
