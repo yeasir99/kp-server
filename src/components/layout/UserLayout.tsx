@@ -11,7 +11,7 @@ export default async function UserLayout({
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-br from-gray-100 to-gray-300 p-4">
       <header className="mb-6 flex items-center justify-between">
-        <Link href="/poster">
+        <Link href="/user">
           <h1 className="text-2xl font-bold text-gray-800">User Dashboard</h1>
         </Link>
         <div className="flex items-center space-x-2">

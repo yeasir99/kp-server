@@ -108,6 +108,8 @@ export async function POST(req: Request) {
       "address",
       "dob",
       "phone",
+      "accnum",
+      "biccode",
     ];
 
     const toCreate: any[] = [];
@@ -142,6 +144,8 @@ export async function POST(req: Request) {
         address: String(row["address"]),
         dob: date,
         phone: String(row["phone"]),
+        accNum: String(row["accnum"]).trim(),
+        bicCode: String(row["biccode"]).trim(),
         userId: session.user.id,
       });
     });

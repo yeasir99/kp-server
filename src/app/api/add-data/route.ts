@@ -24,6 +24,8 @@ export async function POST(req: Request) {
     let address = "";
     let dob = "";
     let phone = "";
+    let accNum = "";
+    let bicCode = "";
 
     if (contentType?.includes("application/json")) {
       const body = await req.json();
@@ -37,6 +39,8 @@ export async function POST(req: Request) {
       address = body.address ?? "";
       dob = body.dob ?? "";
       phone = body.phone ?? "";
+      accNum = body.accNum ?? "";
+      bicCode = body.bicCode ?? "";
     } else if (contentType?.includes("multipart/form-data")) {
       const formData = await req.formData();
       name = (formData.get("name") as string) || "";
@@ -49,6 +53,8 @@ export async function POST(req: Request) {
       address = (formData.get("address") as string) || "";
       dob = (formData.get("dob") as string) || "";
       phone = (formData.get("phone") as string) || "";
+      accNum = (formData.get("accNum") as string) || "";
+      bicCode = (formData.get("bicCode") as string) || "";
     }
 
     const missing = [
@@ -62,6 +68,8 @@ export async function POST(req: Request) {
       { key: "address", val: address },
       { key: "dob", val: dob },
       { key: "phone", val: phone },
+      { key: "accNum", val: accNum },
+      { key: "bicCode", val: bicCode },
     ].filter((f) => !f.val || String(f.val).trim() === "");
 
     if (missing.length > 0) {
@@ -124,6 +132,8 @@ export async function POST(req: Request) {
       address,
       dob: birthDate,
       phone,
+      accNum: accNum.trim(),
+      bicCode: bicCode.trim(),
       userId: session.user.id,
     };
 

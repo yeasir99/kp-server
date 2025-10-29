@@ -142,6 +142,8 @@ exports.Prisma.DocsScalarFieldEnum = {
   address: 'address',
   dob: 'dob',
   phone: 'phone',
+  accNum: 'accNum',
+  bicCode: 'bicCode',
   status: 'status',
   userId: 'userId',
   createdAt: 'createdAt'
@@ -164,11 +166,6 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
-};
-
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
 };
 exports.UserRole = exports.$Enums.UserRole = {
   ROOT: 'ROOT',

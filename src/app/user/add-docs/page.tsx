@@ -20,6 +20,8 @@ export default function UploadPage() {
   const [address, setAddress] = useState("");
   const [dob, setDob] = useState("");
   const [phone, setPhone] = useState("");
+  const [accNum, setAccNum] = useState("");
+  const [bicCode, setBicCode] = useState("");
   const [loading, setLoading] = useState(false);
 
   // file upload state
@@ -38,7 +40,9 @@ export default function UploadPage() {
       !postCode ||
       !address ||
       !dob ||
-      !phone
+      !phone ||
+      !accNum ||
+      !bicCode
     ) {
       toast({
         variant: "destructive",
@@ -106,6 +110,8 @@ export default function UploadPage() {
           address,
           dob,
           phone,
+          accNum,
+          bicCode,
           status: "Free",
         }),
       });
@@ -136,6 +142,8 @@ export default function UploadPage() {
       setAddress("");
       setDob("");
       setPhone("");
+      setAccNum("");
+      setBicCode("");
     } catch (error) {
       setLoading(false);
       toast({
@@ -255,6 +263,20 @@ export default function UploadPage() {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <Input
+                    placeholder="Account Number"
+                    value={accNum}
+                    onChange={(e) => setAccNum(e.target.value)}
+                    required
+                  />
+                  <Input
+                    placeholder="BIC Code"
+                    value={bicCode}
+                    onChange={(e) => setBicCode(e.target.value)}
                     required
                   />
                 </div>
