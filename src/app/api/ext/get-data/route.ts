@@ -34,6 +34,8 @@ export async function GET(req: Request) {
         address: true,
         dob: true,
         phone: true,
+        accNum: true,
+        bicCode: true,
       },
     });
     console.log(data);
